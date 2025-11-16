@@ -1,2 +1,3 @@
-# KisahSuksesProKKI
-Aplikasi Kisah Sukses Pro — inspirasi sukses harian dengan AI mentor
+# Kisah Sukses Final AI Hebat
+
+Render-ready package. Push files to repo root.

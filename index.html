@@ -1,56 +1,19 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Kisah Sukses Pro</title>
-  <style>
-    body{font-family: Arial, Helvetica, sans-serif; margin:20px; background:#f3f4f6; color:#111}
-    h1{margin:0 0 12px 0}
-    .menu{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
-    .menu button{padding:8px 12px;border-radius:6px;border:1px solid #bbb;background:#fff;cursor:pointer}
-    .menu button.active{background:#ff9800;color:#fff;border-color:#e68a00}
-    .container{background:#fff;padding:16px;border-radius:10px;min-height:320px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
-    .tab{display:none}
-    .tab.active{display:block}
-    textarea,input{width:100%;padding:10px;border-radius:6px;border:1px solid #ddd;margin:8px 0;box-sizing:border-box}
-    .small{font-size:13px;color:#555}
-    button.primary{background:#ff9800;border:none;color:#fff;padding:8px 12px;border-radius:6px;cursor:pointer}
-  </style>
-</head>
-<body>
-  <h1>Kisah Sukses Pro</h1>
+<div id="youtube" class="tab">
+  <h2>YouTube Player + Search</h2>
 
-  <div class="menu" id="menu">
-    <button data-tab="ai" class="active">AI Assistant</button>
-    <button data-tab="youtube">YouTube Search</button>
-    <button data-tab="tiktok">TikTok Search</button>
-    <button data-tab="instagram">Instagram Viewer</button>
-    <button data-tab="facebook">Facebook Viewer</button>
-    <button data-tab="cuaca">Cuaca</button>
-    <button data-tab="quote">Quote</button>
-    <button data-tab="game">Game</button>
-    <button data-tab="google">Google Search</button>
+  <input id="ytSearch" placeholder="Cari video YouTube..." />
+
+  <button class="primary" onclick="searchYouTube()">Search</button>
+  <button class="primary" onclick="randomVideo()">Random</button>
+
+  <div id="ytPlayerBox" style="margin-top:12px;">
+    <iframe
+      id="ytPlayer"
+      width="100%"
+      height="300"
+      style="border-radius:10px"
+      src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+      allowfullscreen>
+    </iframe>
   </div>
-
-  <div class="container">
-    <div id="ai" class="tab active">
-      <h2>AI Assistant</h2>
-      <textarea id="userInput" placeholder="Tulis pesanmu..." rows="6"></textarea>
-      <button class="primary" id="sendBtn">Kirim</button>
-      <div id="response" style="margin-top:12px;"></div>
-    </div>
-
-    <div id="youtube" class="tab"><h2>YouTube Player + Search</h2><div id="ytArea"></div></div>
-    <div id="tiktok" class="tab"><h2>TikTok Viewer + Search</h2><div id="ttArea"></div></div>
-    <div id="instagram" class="tab"><h2>Instagram Viewer</h2><div id="igArea"></div></div>
-    <div id="facebook" class="tab"><h2>Facebook Viewer</h2><div id="fbArea"></div></div>
-    <div id="cuaca" class="tab"><h2>Cuaca Saat Ini</h2><div id="weatherArea"></div></div>
-    <div id="quote" class="tab"><h2>Quote Generator</h2><div id="quoteArea"></div></div>
-    <div id="game" class="tab"><h2>Game</h2><div id="gameArea"></div></div>
-    <div id="google" class="tab"><h2>Google Search</h2><div id="googleArea"></div></div>
-  </div>
-
-  <script src="script.js"></script>
-</body>
-</html>
+</div>

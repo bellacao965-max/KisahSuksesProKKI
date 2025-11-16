@@ -1,22 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kisah Sukses Pro</title>
-  <link rel="stylesheet" href="style.css" />
+
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <div class="container">
-    <h1>Kisah Sukses Pro</h1>
+  <h1>Kisah Sukses Pro</h1>
 
+  <div class="menu">
+    <button onclick="showTab('ai')">AI Assistant</button>
+    <button onclick="showTab('youtube')">YouTube Search</button>
+    <button onclick="showTab('tiktok')">TikTok Search</button>
+    <button onclick="showTab('instagram')">Instagram Viewer</button>
+    <button onclick="showTab('facebook')">Facebook Viewer</button>
+    <button onclick="showTab('cuaca')">Cuaca</button>
+    <button onclick="showTab('quote')">Quote</button>
+    <button onclick="showTab('game')">Game</button>
+    <button onclick="showTab('google')">Google Search</button>
+  </div>
+
+  <div id="ai" class="tab">
+    <h2>AI Assistant</h2>
     <textarea id="userInput" placeholder="Tulis pesanmu..."></textarea>
-
     <button onclick="sendMessage()">Kirim</button>
-
     <div id="response"></div>
   </div>
+
+  <div id="youtube" class="tab">YouTube Feature</div>
+  <div id="tiktok" class="tab">TikTok Feature</div>
+  <div id="instagram" class="tab">Instagram Feature</div>
+  <div id="facebook" class="tab">Facebook Feature</div>
+  <div id="cuaca" class="tab">Cuaca Feature</div>
+  <div id="quote" class="tab">Quote Feature</div>
+  <div id="game" class="tab">Game Feature</div>
+  <div id="google" class="tab">Google Feature</div>
 
   <script src="script.js"></script>
 </body>

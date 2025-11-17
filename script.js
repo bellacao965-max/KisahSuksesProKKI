@@ -36,7 +36,7 @@ document.getElementById("sendBtn").addEventListener("click", async () => {
 });
 
 /* ===========================================================
-   YOUTUBE PLAYER + SEARCH (100% FIX)
+   YOUTUBE PLAYER + SEARCH
    =========================================================== */
 const defaultVideos = [
   "dQw4w9WgXcQ",
@@ -47,43 +47,40 @@ const defaultVideos = [
 ];
 
 function loadVideo(id) {
-  const iframe = document.getElementById("ytPlayer");
-  iframe.src = "https://www.youtube.com/embed/" + id + "?rel=0&modestbranding=1";
+  document.getElementById("ytPlayer").src =
+    "https://www.youtube.com/embed/" + id + "?rel=0&modestbranding=1";
 }
 
 function randomVideo() {
-  const id = defaultVideos[Math.floor(Math.random() * defaultVideos.length)];
-  loadVideo(id);
+  loadVideo(defaultVideos[Math.floor(Math.random() * defaultVideos.length)]);
 }
 
 function searchYouTube() {
   const q = document.getElementById("ytSearch").value.trim();
   if (!q) return randomVideo();
 
-  // noembed API (gratis, tanpa API key)
-  fetch("https://noembed.com/embed?url=https://www.youtube.com/watch?v=" + q)
-    .then(r => r.json())
-    .then(d => {
-      if (d.video_id) loadVideo(d.video_id);
-      else window.open("https://www.youtube.com/results?search_query=" + encodeURIComponent(q));
-    })
-    .catch(() => {
-      window.open("https://www.youtube.com/results?search_query=" + encodeURIComponent(q));
-    });
+  // Jika input ID video
+  if (q.length === 11) {
+    loadVideo(q);
+    return;
+  }
+
+  // Kalau teks → search YouTube
+  window.open(
+    "https://www.youtube.com/results?search_query=" + encodeURIComponent(q),
+    "_blank"
+  );
 }
 
-// Load video pertama setelah 1 detik
 setTimeout(randomVideo, 1000);
 
 /* ===========================================================
-   TIKTOK VIEWER
+   TIKTOK VIEWER (lebih stabil)
    =========================================================== */
-function loadTiktok(query) {
-  if (!query) query = "viral";
+function loadTiktok(q = "viral") {
   document.getElementById("ttArea").innerHTML = `
-    <iframe width="100%" height="400" 
-      src="https://www.tiktok.com/search?q=${encodeURIComponent(query)}"
-      style="border-radius:10px;border:none">
+    <iframe src="https://www.tiktok.com/search?q=${encodeURIComponent(q)}"
+      width="100%" height="500" style="border:none;border-radius:10px">
     </iframe>`;
 }
 
@@ -92,9 +89,9 @@ function loadTiktok(query) {
    =========================================================== */
 function loadIG() {
   document.getElementById("igArea").innerHTML = `
-    <iframe width="100%" height="400"
-      src="https://www.instagram.com"
-      style="border:none;border-radius:10px"></iframe>`;
+    <iframe src="https://www.instagram.com"
+      width="100%" height="500" style="border:none;border-radius:10px">
+    </iframe>`;
 }
 
 /* ===========================================================
@@ -102,9 +99,9 @@ function loadIG() {
    =========================================================== */
 function loadFB() {
   document.getElementById("fbArea").innerHTML = `
-    <iframe width="100%" height="400"
-      src="https://www.facebook.com"
-      style="border:none;border-radius:10px"></iframe>`;
+    <iframe src="https://m.facebook.com"
+      width="100%" height="500" style="border:none;border-radius:10px">
+    </iframe>`;
 }
 
 /* ===========================================================
@@ -113,13 +110,13 @@ function loadFB() {
 function loadQuote() {
   fetch("/api/quote")
     .then(r => r.json())
-    .then(d => document.getElementById("quoteArea").innerText = d.quote)
-    .catch(() => document.getElementById("quoteArea").innerText = "Gagal mengambil quote");
+    .then(d => (document.getElementById("quoteArea").innerText = d.quote))
+    .catch(() => (document.getElementById("quoteArea").innerText = "Gagal memuat quote"));
 }
 loadQuote();
 
 /* ===========================================================
-   CUACA (tanpa API key, auto lokasi)
+   CUACA
    =========================================================== */
 function loadWeather() {
   if (!navigator.geolocation) {
@@ -131,8 +128,8 @@ function loadWeather() {
     const { latitude, longitude } = pos.coords;
     fetch(`https://wttr.in/${latitude},${longitude}?format=3`)
       .then(r => r.text())
-      .then(t => document.getElementById("weatherArea").innerText = t)
-      .catch(() => document.getElementById("weatherArea").innerText = "Gagal memuat cuaca.");
+      .then(t => (document.getElementById("weatherArea").innerText = t))
+      .catch(() => (document.getElementById("weatherArea").innerText = "Gagal memuat cuaca."));
   });
 }
 loadWeather();
@@ -151,8 +148,8 @@ function loadGame() {
 
 function playGame(name) {
   document.getElementById("gameArea").innerHTML = `
-    <iframe src="${name}.html" width="100%" height="400" style="border:none;border-radius:10px"></iframe>
-  `;
+    <iframe src="${name}.html" width="100%" height="500"
+      style="border:none;border-radius:10px"></iframe>`;
 }
 
 loadGame();
@@ -160,10 +157,20 @@ loadGame();
 /* ===========================================================
    GOOGLE SEARCH
    =========================================================== */
-function loadGoogle(query) {
-  if (!query) query = "Tutorial sukses";
+function loadGoogle(q = "Berita trending") {
   document.getElementById("googleArea").innerHTML = `
-    <iframe width="100%" height="400" 
-      src="https://www.google.com/search?q=${encodeURIComponent(query)}"
-      style="border:none;border-radius:10px"></iframe>`;
+    <iframe src="https://www.google.com/search?q=${encodeURIComponent(q)}"
+      width="100%" height="500" style="border:none;border-radius:10px">
+    </iframe>`;
 }
+
+/* ===========================================================
+   REGISTER FUNCTIONS → FIX PENTING!!!
+   =========================================================== */
+window.searchYouTube = searchYouTube;
+window.randomVideo = randomVideo;
+window.loadTiktok = loadTiktok;
+window.loadIG = loadIG;
+window.loadFB = loadFB;
+window.playGame = playGame;
+window.loadGoogle = loadGoogle;
